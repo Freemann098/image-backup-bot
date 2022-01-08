@@ -47,7 +47,7 @@ This bot uses Discord's slash commands for executing bot commands. After environ
 
 Once the node app is running, you will need to invite the bot to your Discord server using the following link, replace `client_id` with your bot's client ID.
 
-`https://discord.com/api/oauth2/authorize?client_id=928844852739858432&permissions=2147568640&scope=bot%20applications.commands`
+`https://discord.com/api/oauth2/authorize?client_id=1234567890&permissions=2147568640&scope=bot%20applications.commands`
 
 When this bot is running on a Discord server, it comes with 4 slash commands
 
