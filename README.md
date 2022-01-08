@@ -31,6 +31,8 @@ $ npm install
 $ npm start
 ```
 
+Note - `Procfile` is used for Heroku cloud paltform to host bot if you wanted to host on Heroku, otherwise, this file can be ignored
+
 ### Environment Variables
 
 This project uses [dotenv](https://www.npmjs.com/package/dotenv) for the environment variables. The following environment variables will need to be set in a .env file in order for the bot to run properly.
