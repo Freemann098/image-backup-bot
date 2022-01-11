@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
-const { initUrls, getUrls } = require('./backupurls');
+const { getUrls } = require('./backupurls');
 const { uploadImage } = require('./lib/imgur');
 
 const token = process.env.DISCORD_TOKEN;
@@ -45,11 +45,23 @@ client.on('messageCreate', async (message) => {
 
     //Check if someone posted image that contains URL from added backup URLs
     if (message.content.toLowerCase().includes('http')) {
-        for (let i = 0; i< getUrls().length; i++) {
-            if (message.content.includes(getUrls()[i])) {
+        let urls = [];
+        await getUrls(message.guildId)
+            .then((res) => {
+                urls = res;
+            })
+            .catch((error) => {
+                console.log('Error: ' + error);
+                message.reply('There was an issue getting the URL list: ' + error);
+            }
+        );
+
+        for (let i = 0; i < urls.length; i++) {
+            if (message.content.includes(urls[i])) {
                 backupImage = true;
             }
         }
+        
         if (backupImage) {
             await uploadImage(message.content)
                 .then((res) => {
