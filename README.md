@@ -3,7 +3,7 @@
 <table>
 <tr>
 <td>
-  Discord bot that automatically backs up image/video links to Imgur based on base URLs provided for the bot to look for. The purpose of this Discord bot would be to back up image or video links that are posted that may not be retained by their host because of post expiration or deletion. Works with all Imgur supported formats which includes all standard image formats and the following video formats
+  Discord bot that automatically backs up image/video links to Imgur based on base URLs provided for the bot to look for. The purpose of this Discord bot would be to back up image or video links that are posted that may not be retained by their host because of post expiration or deletion. Works with all Imgur supported formats which includes all standard image formats.
 </td>
 </tr>
 </table>
