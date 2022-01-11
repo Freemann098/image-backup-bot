@@ -6,14 +6,17 @@ module.exports = {
         .setName('backup')
         .setDescription('Perform one-time backup on specific photo')
         .addStringOption(option => option.setName('url').setDescription('Image URL').setRequired(true)),
-    async execute(interaction) {
+    async execute(interaction, gid) {
         const urlOption = interaction.options.getString('url');
 
-        await uploadImage(urlOption).then((res) => {
-            interaction.reply(res);
-        }).catch((error) => {
-            console.log('Error: ' + error);
-            return;
-        });
+        await uploadImage(urlOption)
+            .then((res) => {
+                interaction.reply(res);
+            })
+            .catch((error) => {
+                console.log('Error: ' + error);
+                return;
+            }
+        );
     },
 };

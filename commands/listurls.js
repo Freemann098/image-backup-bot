@@ -5,12 +5,23 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('listurls')
         .setDescription('List urls that have been added for backup'),
-    async execute(interaction) {
+    async execute(interaction, gid) {
         let message = 'Urls added: ';
+        let urls = [];
         
-        if (getUrls().length > 0) {
-            for (let i = 0; i < getUrls().length; i++) {
-                message = message + getUrls()[i] + ", ";
+        await getUrls(gid)
+            .then((res) => {
+                urls = res;
+            })
+            .catch((error) => {
+                console.log('Error: ' + error);
+                message = 'There was an issue getting the URL list, please try again.';
+            }
+        );
+
+        if (urls.length > 0) {
+            for (let i = 0; i < urls.length; i++) {
+                message = message + urls[i] + ", ";
             }
             //remove extra space and comma
             message = message.substring(0, message.length-2);

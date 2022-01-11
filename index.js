@@ -1,7 +1,8 @@
 require('dotenv').config();
+
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
-const { getUrls } = require('./backupurls');
+const { initUrls, getUrls } = require('./backupurls');
 const { uploadImage } = require('./lib/imgur');
 
 const token = process.env.DISCORD_TOKEN;
@@ -16,12 +17,13 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
 }
 
-client.once('ready', () => {
+client.once('ready', (res) => {
     console.log('ready');
 });
 
 //Slash commdands
 client.on('interactionCreate', async (interaction) => {
+    
     if (!interaction.isCommand()) return;
 
     const command = client.commands.get(interaction.commandName);
@@ -29,7 +31,7 @@ client.on('interactionCreate', async (interaction) => {
     if (!command) return;
 
     try {
-        await command.execute(interaction);
+        await command.execute(interaction, interaction.guildId);
     } catch (error) {
         console.error(error);
         await interaction.reply({ content: 'Error executing commmand', ephemeral: true});
@@ -49,12 +51,15 @@ client.on('messageCreate', async (message) => {
             }
         }
         if (backupImage) {
-            await uploadImage(message.content).then((res) => {
-                message.reply(res);
-            }).catch((error) => {
-                console.log('Error: ' + error);
-                return;
-            });
+            await uploadImage(message.content)
+                .then((res) => {
+                    message.reply(res);
+                })
+                .catch((error) => {
+                    console.log('Error: ' + error);
+                    return;
+                }
+            );
         }
     }
 });
