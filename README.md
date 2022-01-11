@@ -8,8 +8,6 @@
 </tr>
 </table>
 
-![](https://i.imgur.com/Bkp8D1D.png)
-
 ## Installing
 
 To clone and run this bot application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) 
